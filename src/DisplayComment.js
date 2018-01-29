@@ -26,7 +26,7 @@ class DisplayComment extends React.Component {
   createLink = (text) => {
     text=text.split(' ');
     var str=text.join('%20');
-    var linkStr= "https://twitter.com/intent/tweet?text="+str+"&tw_p=tweetbutton";
+    var linkStr= "https://twitter.com/intent/tweet?text="+str+"&tw_p=tweetbutton&url=https://mini--blog-state.herokuapp.com/";
     return linkStr;
   }
 

@@ -17,7 +17,7 @@ class DisplayAll extends React.Component {
       <div className="display_all">
         {this.props.comments.length!==0? this.props.comments.map((comment,i) => {
             return(<DisplayComment key={i} comment={comment} clickLike={this.props.clickLike}/>);
-          }):null
+          }):(<p className="no_comments">No Comments Yet!</p>)
         }
       </div>
     );

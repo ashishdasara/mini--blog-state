@@ -6,4 +6,4 @@ Mini--Blog
 
 #P.S: As this app uses FB share for sharing content to fb, it is advised to use ths heroku demo link for the demo, as FB doesn't support sharing data from local-host.
 
-## demo link: 
+## demo link: https://mini--blog-state.herokuapp.com/

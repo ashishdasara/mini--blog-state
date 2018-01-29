@@ -50,3 +50,8 @@
   border: 0px;
   padding-top: 7px;
 }
+.no_comments{
+  text-align: center;
+  background-color: #e6e9ef;
+  padding: 15px;
+}
