@@ -22,7 +22,7 @@ class DisplayComment extends React.Component {
         <p>{this.props.comment.text}</p>
         <span>{this.props.comment.properties.likes} {this.props.comment.properties.likes===1?"like ":"likes "} </span>
         <span>| </span>
-        <span>{this.props.comment.properties.followers} {this.props.comment.properties.likes===1?"follower":"followers"} </span>
+        <span>{this.props.comment.properties.followers} {this.props.comment.properties.followers===1?"follower":"followers"} </span>
 
         <div className="buttons">
           <button onClick={()=>this.props.clickLike(this.props.comment)}>
