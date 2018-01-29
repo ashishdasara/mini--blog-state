@@ -25,11 +25,11 @@ class DisplayComment extends React.Component {
         <span>{this.props.comment.properties.followers} {this.props.comment.properties.followers===1?"follower":"followers"} </span>
 
         <div className="buttons">
-          <button onClick={()=>this.props.clickLike(this.props.comment)}>
+          <button data-toggle="tooltip" title="Like" onClick={()=>this.props.clickLike(this.props.comment)}>
             <span className="glyphicon glyphicon-thumbs-up"></span>
           </button>
 
-          <button onClick={()=>this.props.clickFollow(this.props.comment)}>
+          <button data-toggle="tooltip" title="Follow" onClick={()=>this.props.clickFollow(this.props.comment)}>
             <span className="glyphicon glyphicon-plus"></span>
           </button>
 
