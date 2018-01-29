@@ -1,5 +1,5 @@
 import React from 'react';
-import FacebookProvider, { Share as FbShare} from 'react-facebook';
+import FacebookProvider, { Share } from 'react-facebook';
 
 class DisplayComment extends React.Component {
 
@@ -40,11 +40,11 @@ class DisplayComment extends React.Component {
             <span className="glyphicon glyphicon-thumbs-up"></span>
           </button>
           <FacebookProvider appId="334164410431105">
-            <FbShare quote={this.props.comment.text}>
+            <Share quote={this.props.comment.text}>
                 <a data-toggle="tooltip" title="Share" data-placement="top" className="btn">
                   <i className="fa fa-facebook"></i>
                 </a>
-            </FbShare>
+            </Share>
           </FacebookProvider>
           <a target="_blank" className="btn" data-toggle="tooltip" title="Tweet" data-placement="top" href={this.createLink(this.state.comment.text)}>
             <i className="fa fa-twitter"></i>
