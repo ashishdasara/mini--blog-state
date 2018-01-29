@@ -9,7 +9,7 @@ class CreateComment extends React.Component {
         text: "",
         properties: {
           likes: 0,
-          shares: 0
+          followers: 0
         }
       }
     };

@@ -5,22 +5,8 @@ class DisplayComment extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state={
-      comment: {
-        text: "",
-        id: 0,
-        properties: {
-          likes: 0,
-          shares: 0
-        }
-      }
-    };
-    this.createLink = this.createLink.bind(this);
-  }
 
-  componentWillMount() {
-    let newComment = this.props.comment;
-    this.setState({comment: newComment});
+    this.createLink = this.createLink.bind(this);
   }
 
   createLink = (text) => {
@@ -34,11 +20,19 @@ class DisplayComment extends React.Component {
     return(
       <div className="container display_comment">
         <p>{this.props.comment.text}</p>
+        <span>{this.props.comment.properties.likes} {this.props.comment.properties.likes===1?"like ":"likes "} </span>
+        <span>| </span>
+        <span>{this.props.comment.properties.followers} {this.props.comment.properties.likes===1?"follower":"followers"} </span>
+
         <div className="buttons">
-          <span>{this.props.comment.properties.likes} {this.props.comment.properties.likes===1?"person likes this":"people like this"} </span>
           <button onClick={()=>this.props.clickLike(this.props.comment)}>
             <span className="glyphicon glyphicon-thumbs-up"></span>
           </button>
+
+          <button onClick={()=>this.props.clickFollow(this.props.comment)}>
+            <span className="glyphicon glyphicon-plus"></span>
+          </button>
+
           <FacebookProvider appId="242768822931140">
             <Share quote={this.props.comment.text}>
                 <a data-toggle="tooltip" title="Share" data-placement="top" className="btn">
@@ -46,9 +40,11 @@ class DisplayComment extends React.Component {
                 </a>
             </Share>
           </FacebookProvider>
-          <a target="_blank" className="btn" data-toggle="tooltip" title="Tweet" data-placement="top" href={this.createLink(this.state.comment.text)}>
+
+          <a target="_blank" className="btn" data-toggle="tooltip" title="Tweet" data-placement="top" href={this.createLink(this.props.comment.text)}>
             <i className="fa fa-twitter"></i>
           </a>
+
         </div>
       </div>
     );

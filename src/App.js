@@ -13,6 +13,7 @@ class App extends React.Component {
     };
     this.handleEnter=this.handleEnter.bind(this);
     this.clickLike = this.clickLike.bind(this);
+    this.clickFollow = this.clickFollow.bind(this);
   }
 
   clickLike(comment) {
@@ -20,7 +21,12 @@ class App extends React.Component {
     var commentsCopy = this.state.comments.slice();
     commentsCopy[index].properties.likes+=1;
     this.setState({comments: commentsCopy});
-
+  }
+  clickFollow(comment) {
+    let index=this.state.comments.indexOf(comment)
+    var commentsCopy = this.state.comments.slice();
+    commentsCopy[index].properties.followers+=1;
+    this.setState({comments: commentsCopy});
   }
 
   handleEnter(text) {
@@ -29,7 +35,7 @@ class App extends React.Component {
       text: "",
       properties: {
         likes: 0,
-        shares: 0
+        followers: 0
       }
     };
     emptyComment.text=text;
@@ -39,10 +45,11 @@ class App extends React.Component {
 
 
   render() {
+    console.log("state:", this.state.comments );
     return(
       <div className="container">
         <CreateComment handleEnter={this.handleEnter}/>
-        <DisplayAll comments={this.state.comments} clickLike={this.clickLike}/>
+        <DisplayAll comments={this.state.comments} clickLike={this.clickLike} clickFollow={this.clickFollow}/>
       </div>
     )
   }
