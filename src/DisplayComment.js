@@ -39,7 +39,7 @@ class DisplayComment extends React.Component {
           <button onClick={()=>this.props.clickLike(this.props.comment)}>
             <span className="glyphicon glyphicon-thumbs-up"></span>
           </button>
-          <FacebookProvider appId="334164410431105">
+          <FacebookProvider appId="242768822931140">
             <Share quote={this.props.comment.text}>
                 <a data-toggle="tooltip" title="Share" data-placement="top" className="btn">
                   <i className="fa fa-facebook"></i>
