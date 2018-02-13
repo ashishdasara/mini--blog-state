@@ -12,34 +12,38 @@ class App extends React.Component {
       items: []
     };
     this.handleEnter=this.handleEnter.bind(this);
-    this.clickLike = this.clickLike.bind(this);
-    this.clickFollow = this.clickFollow.bind(this);
+    this.toggleLike = this.toggleLike.bind(this);
+    this.toggleFollow = this.toggleFollow.bind(this);
   }
 
-  clickLike(comment) {
+  toggleLike(comment,liked) {
     let index=this.state.comments.indexOf(comment)
     var commentsCopy = this.state.comments.slice();
-    commentsCopy[index].properties.likes+=1;
-    this.setState({comments: commentsCopy});
-  }
-  clickFollow(comment) {
-    let index=this.state.comments.indexOf(comment)
-    var commentsCopy = this.state.comments.slice();
-    commentsCopy[index].properties.followers+=1;
+    liked===false? commentsCopy[index].properties.likes+=1 :commentsCopy[index].properties.likes-=1;
     this.setState({comments: commentsCopy});
   }
 
-  handleEnter(text) {
+  toggleFollow(comment,followed) {
+    let index=this.state.comments.indexOf(comment)
+    var commentsCopy = this.state.comments.slice();
+    followed===false? commentsCopy[index].properties.followers+=1 :commentsCopy[index].properties.followers-=1;
+    this.setState({comments: commentsCopy});
+  }
+
+
+  handleEnter(text,date) {
     var commentsCopy = this.state.comments.slice();
     var emptyComment = {
       text: "",
       properties: {
         likes: 0,
-        followers: 0
+        followers: 0,
+        date: 0
       }
     };
     emptyComment.text=text;
-    commentsCopy.push(emptyComment);
+    emptyComment.properties.date=date;
+    commentsCopy.unshift(emptyComment);
     this.setState({comments: commentsCopy});
   }
 
@@ -48,7 +52,7 @@ class App extends React.Component {
     return(
       <div className="container">
         <CreateComment handleEnter={this.handleEnter}/>
-        <DisplayAll comments={this.state.comments} clickLike={this.clickLike} clickFollow={this.clickFollow}/>
+        <DisplayAll comments={this.state.comments} toggleLike={this.toggleLike} toggleFollow={this.toggleFollow}/>
       </div>
     )
   }

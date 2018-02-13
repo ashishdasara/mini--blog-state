@@ -9,7 +9,8 @@ class CreateComment extends React.Component {
         text: "",
         properties: {
           likes: 0,
-          followers: 0
+          followers: 0,
+          date: ""
         }
       }
     };
@@ -22,11 +23,12 @@ class CreateComment extends React.Component {
     this.setState({comment: newComment});
   }
   handleEnter() {
-    this.props.handleEnter(this.state.comment.text);
-    var newComment=this.state.comment;
+    let newComment=this.state.comment;
+    newComment.properties.date = new Date();
+    this.setState({comment: newComment});
+    this.props.handleEnter(this.state.comment.text,this.state.comment.properties.date);
     newComment.text="";
     this.setState({comment: newComment});
-
   }
   render() {
     return(
