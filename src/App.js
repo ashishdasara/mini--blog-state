@@ -16,15 +16,13 @@ class App extends React.Component {
     this.toggleFollow = this.toggleFollow.bind(this);
   }
 
-  toggleLike(comment,liked) {
-    let index=this.state.comments.indexOf(comment)
+  toggleLike(comment,index,liked) {
     var commentsCopy = this.state.comments.slice();
     liked===false? commentsCopy[index].properties.likes+=1 :commentsCopy[index].properties.likes-=1;
     this.setState({comments: commentsCopy});
   }
 
-  toggleFollow(comment,followed) {
-    let index=this.state.comments.indexOf(comment)
+  toggleFollow(comment,index,followed) {
     var commentsCopy = this.state.comments.slice();
     followed===false? commentsCopy[index].properties.followers+=1 :commentsCopy[index].properties.followers-=1;
     this.setState({comments: commentsCopy});
@@ -43,7 +41,7 @@ class App extends React.Component {
     };
     emptyComment.text=text;
     emptyComment.properties.date=date;
-    commentsCopy.unshift(emptyComment);
+    commentsCopy.push(emptyComment);
     this.setState({comments: commentsCopy});
   }
 

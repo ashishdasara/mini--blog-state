@@ -4,15 +4,23 @@ import DisplayComment from './DisplayComment'
 class DisplayAll extends React.Component {
 
   render() {
+    var cmnts=[];
+    let comments=this.props.comments
+    if (comments.length>0) {
+      for(let i=0; i<comments.length; i++) {
+        cmnts[i] = <DisplayComment key={i} comment={comments[i]} toggleLike={this.props.toggleLike} toggleFollow={this.props.toggleFollow} comments={comments}/>
+      }
+    }
+    var display = cmnts.reverse();
     return (
       <div className="display_all">
-        {this.props.comments.length!==0? this.props.comments.map((comment,i) => {
-          return(
-            <DisplayComment key={i} comment={comment} toggleLike={this.props.toggleLike} toggleFollow={this.props.toggleFollow}/>
-        )}):(
-          <div className="display_comment">
-            <p className="comment">No Comments Yet!</p>
-          </div>
+        {
+          display.length>0? display.map((comment,i)=>
+            {return comment}
+          ):(
+            <div className="display_comment">
+              <p className="comment">No Comments Yet!</p>
+            </div>
           )
         }
       </div>

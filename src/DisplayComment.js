@@ -9,11 +9,11 @@ class DisplayComment extends React.Component {
       liked: false,
       followed: false
     }
+
     this.createLink = this.createLink.bind(this);
     this.dateDisplay = this.dateDisplay.bind(this);
     this.toggleLike = this.toggleLike.bind(this);
     this.toggleFollow = this.toggleFollow.bind(this);
-
   }
 
   createLink = (text) => {
@@ -34,15 +34,12 @@ class DisplayComment extends React.Component {
     if(dd<10) {
         dd = '0'+dd
     }
-
     if(mm<10) {
         mm = '0'+mm
     }
-
     if(hh<10) {
       hh = '0'+hh
     }
-
     if(min<10) {
         min = '0'+min
     }
@@ -50,14 +47,20 @@ class DisplayComment extends React.Component {
     return date;
   }
   toggleLike() {
-      this.props.toggleLike(this.props.comment,this.state.liked);
-      document.getElementById('like').style.color=this.state.liked?"black":"blue";
-      this.setState({liked: this.state.liked?false:true})
+    let length=this.props.comments.length;
+    let index=this.props.comments.indexOf(this.props.comment);
+    let x = document.getElementsByClassName("like");
+    x[length-index-1].style.color=this.state.liked?"black":"blue";
+    this.setState({liked: this.state.liked?false:true})
+    this.props.toggleLike(this.props.comment, index, this.state.liked);
   }
   toggleFollow() {
-      this.props.toggleFollow(this.props.comment,this.state.followed);
-      document.getElementById('follow').style.color=this.state.followed?"black":"blue";
-      this.setState({followed: this.state.followed?false:true})
+    let length=this.props.comments.length;
+    let index=this.props.comments.indexOf(this.props.comment);
+    let x = document.getElementsByClassName("follow");
+    x[length-index-1].style.color=this.state.followed?"black":"blue";
+    this.setState({followed: this.state.followed?false:true})
+    this.props.toggleFollow(this.props.comment, index, this.state.followed);
   }
   render() {
     return(
@@ -75,22 +78,26 @@ class DisplayComment extends React.Component {
         </div>
 
         <div className="buttons">
-          <button data-toggle="tooltip" title="Like" onClick={this.toggleLike}>
-            <span id="like" className="glyphicon glyphicon-thumbs-up"></span>
+          <button data-toggle="tooltip" title={this.state.liked?"Unlike":"Like"} onClick={this.toggleLike}>
+            <span className="like glyphicon glyphicon-thumbs-up"></span>
           </button>
-          <button data-toggle="tooltip" title="Follow" onClick={this.toggleFollow}>
-            <span id="follow" className="glyphicon glyphicon-plus"></span>
+
+          <button data-toggle="tooltip" title={this.state.followed?"Unfollow":"Follow"} onClick={this.toggleFollow}>
+            <span className="follow glyphicon glyphicon-plus"></span>
           </button>
+
           <FacebookProvider appId="242768822931140">
             <Share quote={this.props.comment.text}>
-                <a data-toggle="tooltip" title="Share" data-placement="top" className="btn">
-                  <i className="fa fa-facebook"></i>
-                </a>
+              <a data-toggle="tooltip" title="Share" data-placement="top" className="btn">
+                <i className="fa fa-facebook"></i>
+              </a>
             </Share>
           </FacebookProvider>
+
           <a target="_blank" className="btn" data-toggle="tooltip" title="Tweet" data-placement="top" href={this.createLink(this.props.comment.text)}>
             <i className="fa fa-twitter"></i>
           </a>
+
         </div>
       </div>
     );
