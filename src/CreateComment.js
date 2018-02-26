@@ -1,8 +1,8 @@
 import React from 'react'
 
 class CreateComment extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       comment: {
@@ -14,15 +14,15 @@ class CreateComment extends React.Component {
         }
       }
     };
-    this.handleTextChange = this.handleTextChange.bind(this);
-    this.handleEnter = this.handleEnter.bind(this);
   }
+
   handleTextChange = (e) => {
-    var newComment=this.state.comment;
+    let newComment=this.state.comment;
     newComment.text = e.target.value;
     this.setState({comment: newComment});
   }
-  handleEnter() {
+
+  handleEnter = () => {
     let newComment=this.state.comment;
     newComment.properties.date = new Date();
     this.setState({comment: newComment});
@@ -30,6 +30,7 @@ class CreateComment extends React.Component {
     newComment.text="";
     this.setState({comment: newComment});
   }
+
   render() {
     return(
       <div className="create_comment">

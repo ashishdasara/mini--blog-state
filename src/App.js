@@ -11,25 +11,34 @@ class App extends React.Component {
       comments: [],
       items: []
     };
-    this.handleEnter=this.handleEnter.bind(this);
-    this.toggleLike = this.toggleLike.bind(this);
-    this.toggleFollow = this.toggleFollow.bind(this);
   }
 
-  toggleLike(comment,index,liked) {
-    var commentsCopy = this.state.comments.slice();
-    liked===false? commentsCopy[index].properties.likes+=1 :commentsCopy[index].properties.likes-=1;
+  // toggleLike = (comment,index,liked) => {
+  //   var commentsCopy = this.state.comments.slice();
+  //   liked===false? commentsCopy[index].properties.likes+=1 :commentsCopy[index].properties.likes-=1;
+  //   this.setState({comments: commentsCopy});
+  // }
+  //
+  // toggleFollow = (comment,index,followed) => {
+  //   var commentsCopy = this.state.comments.slice();
+  //   followed===false? commentsCopy[index].properties.followers+=1 :commentsCopy[index].properties.followers-=1;
+  //   this.setState({comments: commentsCopy});
+  // }
+  toggleClick = (comment, action, condition) => {
+
+    let commentsCopy = this.state.comments.slice();
+    let index = this.state.comments.indexOf(comment);
+
+    if (action === "like") {
+      condition === false? commentsCopy[index].properties.likes += 1: commentsCopy[index].properties.likes-=1;
+    }
+    else {
+      condition===false? commentsCopy[index].properties.followers += 1: commentsCopy[index].properties.followers-=1;
+    }
     this.setState({comments: commentsCopy});
   }
 
-  toggleFollow(comment,index,followed) {
-    var commentsCopy = this.state.comments.slice();
-    followed===false? commentsCopy[index].properties.followers+=1 :commentsCopy[index].properties.followers-=1;
-    this.setState({comments: commentsCopy});
-  }
-
-
-  handleEnter(text,date) {
+  handleEnter = (text,date) => {
     var commentsCopy = this.state.comments.slice();
     var emptyComment = {
       text: "",
@@ -50,7 +59,7 @@ class App extends React.Component {
     return(
       <div className="container">
         <CreateComment handleEnter={this.handleEnter}/>
-        <DisplayAll comments={this.state.comments} toggleLike={this.toggleLike} toggleFollow={this.toggleFollow}/>
+        <DisplayAll comments={this.state.comments} toggleLike={this.toggleLike} toggleFollow={this.toggleFollow} toggleClick={this.toggleClick}/>
       </div>
     )
   }

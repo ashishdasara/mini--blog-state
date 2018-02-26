@@ -4,14 +4,14 @@ import DisplayComment from './DisplayComment'
 class DisplayAll extends React.Component {
 
   render() {
-    var cmnts=[];
+    let cmnts=[];
     let comments=this.props.comments
     if (comments.length>0) {
       for(let i=0; i<comments.length; i++) {
-        cmnts[i] = <DisplayComment key={i} comment={comments[i]} toggleLike={this.props.toggleLike} toggleFollow={this.props.toggleFollow} comments={comments}/>
+        cmnts[i] = <DisplayComment key={i} comment = {comments[i]} toggleLike = {this.props.toggleLike} toggleFollow = {this.props.toggleFollow} comments = {comments} toggleClick = {this.props.toggleClick}/>
       }
     }
-    var display = cmnts.reverse();
+    let display = cmnts.reverse();
     return (
       <div className="display_all">
         {
